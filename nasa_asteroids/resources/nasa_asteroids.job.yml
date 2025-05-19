@@ -1,0 +1,36 @@
+# A job running SQL queries on a SQL warehouse
+resources:
+  jobs:
+    nasa_asteroids:
+      name: nasa_asteroids
+      
+      max_concurrent_runs: 1
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+        - name: days_to_load
+          default: 30
+
+      tasks:
+        - task_key: config
+          sql_task:
+            file:
+              path: ../src/config.sql
+            warehouse_id: ${var.warehouse_id}
+        - task_key: foreach_date
+          depends_on:
+            - task_key: config
+          for_each_task:
+            inputs: "{{tasks.config.output.rows}}"
+            concurrency: 4
+            task:
+              task_key: load_data
+              notebook_task:
+                notebook_path: ../src/nasa_asteroids.sql
+                base_parameters:
+                  date_param: "{{input.date_param}}"
+                source: WORKSPACE
+                warehouse_id: ${var.warehouse_id}

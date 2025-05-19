@@ -1,0 +1,449 @@
+{
+    "datasets": [
+        {
+            "name": "temp_dataset_name",
+            "displayName": "earthquakes",
+            "query": "SELECT\nfrom_utc_timestamp(utc_time, :parameter ) AS time,\ntitle,\nmag,\nlongitude,\nlatitude\nFROM main.chris_koester.earthquakes",
+            "parameters": [
+                {
+                    "displayName": "timezone",
+                    "keyword": "parameter",
+                    "dataType": "STRING",
+                    "defaultSelection": {
+                        "values": {
+                            "dataType": "STRING",
+                            "values": [
+                                {
+                                    "value": "America/New_York"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            "columns": [
+                {
+                    "displayName": "mag_max",
+                    "description": "Maximum magnitude",
+                    "expression": "max(mag)"
+                }
+            ]
+        },
+        {
+            "name": "e3e404a3",
+            "displayName": "param_timezones",
+            "query": "select\n  data.tz\nfrom values\n  ('America/New_York'),\n  ('America/Chicago'),\n  ('America/Denver'),\n  ('America/Los_Angeles') as data(tz)"
+        }
+    ],
+    "pages": [
+        {
+            "name": "temp_page_name",
+            "displayName": "New Page",
+            "layout": [
+                {
+                    "widget": {
+                        "name": "temp_bar_chart_name",
+                        "queries": [
+                            {
+                                "name": "main_query",
+                                "query": {
+                                    "datasetName": "temp_dataset_name",
+                                    "fields": [
+                                        {
+                                            "name": "latitude",
+                                            "expression": "`latitude`"
+                                        },
+                                        {
+                                            "name": "longitude",
+                                            "expression": "`longitude`"
+                                        },
+                                        {
+                                            "name": "title",
+                                            "expression": "`title`"
+                                        },
+                                        {
+                                            "name": "time",
+                                            "expression": "`time`"
+                                        }
+                                    ],
+                                    "disaggregated": true
+                                }
+                            }
+                        ],
+                        "spec": {
+                            "version": 2,
+                            "widgetType": "symbol-map",
+                            "encodings": {
+                                "coordinates": {
+                                    "latitude": {
+                                        "fieldName": "latitude",
+                                        "displayName": "latitude"
+                                    },
+                                    "longitude": {
+                                        "fieldName": "longitude",
+                                        "displayName": "longitude"
+                                    }
+                                },
+                                "extra": [
+                                    {
+                                        "fieldName": "title",
+                                        "displayName": "title"
+                                    },
+                                    {
+                                        "fieldName": "time",
+                                        "displayName": "time"
+                                    },
+                                    {
+                                        "fieldName": "latitude",
+                                        "displayName": "latitude"
+                                    },
+                                    {
+                                        "fieldName": "longitude",
+                                        "displayName": "longitude"
+                                    }
+                                ]
+                            },
+                            "frame": {
+                                "showTitle": true,
+                                "title": "Earthquakes Map"
+                            }
+                        }
+                    },
+                    "position": {
+                        "x": 0,
+                        "y": 2,
+                        "width": 3,
+                        "height": 8
+                    }
+                },
+                {
+                    "widget": {
+                        "name": "temp_table_name",
+                        "queries": [
+                            {
+                                "name": "main_query",
+                                "query": {
+                                    "datasetName": "temp_dataset_name",
+                                    "fields": [
+                                        {
+                                            "name": "title",
+                                            "expression": "`title`"
+                                        },
+                                        {
+                                            "name": "time",
+                                            "expression": "`time`"
+                                        }
+                                    ],
+                                    "disaggregated": true
+                                }
+                            }
+                        ],
+                        "spec": {
+                            "version": 1,
+                            "widgetType": "table",
+                            "encodings": {
+                                "columns": [
+                                    {
+                                        "fieldName": "title",
+                                        "booleanValues": [
+                                            "false",
+                                            "true"
+                                        ],
+                                        "imageUrlTemplate": "{{ @ }}",
+                                        "imageTitleTemplate": "{{ @ }}",
+                                        "imageWidth": "",
+                                        "imageHeight": "",
+                                        "linkUrlTemplate": "{{ @ }}",
+                                        "linkTextTemplate": "{{ @ }}",
+                                        "linkTitleTemplate": "{{ @ }}",
+                                        "linkOpenInNewTab": true,
+                                        "type": "string",
+                                        "displayAs": "string",
+                                        "visible": true,
+                                        "order": 0,
+                                        "title": "title",
+                                        "allowSearch": false,
+                                        "alignContent": "left",
+                                        "allowHTML": false,
+                                        "highlightLinks": false,
+                                        "useMonospaceFont": false,
+                                        "preserveWhitespace": false,
+                                        "displayName": "title"
+                                    },
+                                    {
+                                        "fieldName": "time",
+                                        "dateTimeFormat": "YYYY-MM-DD HH:mm:ss.SSS",
+                                        "numberFormat": "0",
+                                        "booleanValues": [
+                                            "false",
+                                            "true"
+                                        ],
+                                        "imageUrlTemplate": "{{ @ }}",
+                                        "imageTitleTemplate": "{{ @ }}",
+                                        "imageWidth": "",
+                                        "imageHeight": "",
+                                        "linkUrlTemplate": "{{ @ }}",
+                                        "linkTextTemplate": "{{ @ }}",
+                                        "linkTitleTemplate": "{{ @ }}",
+                                        "linkOpenInNewTab": true,
+                                        "type": "datetime",
+                                        "displayAs": "datetime",
+                                        "visible": true,
+                                        "order": 1,
+                                        "title": "time",
+                                        "allowSearch": false,
+                                        "alignContent": "right",
+                                        "allowHTML": false,
+                                        "highlightLinks": false,
+                                        "useMonospaceFont": false,
+                                        "preserveWhitespace": false,
+                                        "displayName": "time"
+                                    }
+                                ]
+                            },
+                            "invisibleColumns": [
+                                {
+                                    "numberFormat": "0.00",
+                                    "booleanValues": [
+                                        "false",
+                                        "true"
+                                    ],
+                                    "imageUrlTemplate": "{{ @ }}",
+                                    "imageTitleTemplate": "{{ @ }}",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "linkUrlTemplate": "{{ @ }}",
+                                    "linkTextTemplate": "{{ @ }}",
+                                    "linkTitleTemplate": "{{ @ }}",
+                                    "linkOpenInNewTab": true,
+                                    "name": "longitude",
+                                    "type": "float",
+                                    "displayAs": "number",
+                                    "order": 2,
+                                    "title": "longitude",
+                                    "allowSearch": false,
+                                    "alignContent": "right",
+                                    "allowHTML": false,
+                                    "highlightLinks": false,
+                                    "useMonospaceFont": false,
+                                    "preserveWhitespace": false
+                                },
+                                {
+                                    "numberFormat": "0.00",
+                                    "booleanValues": [
+                                        "false",
+                                        "true"
+                                    ],
+                                    "imageUrlTemplate": "{{ @ }}",
+                                    "imageTitleTemplate": "{{ @ }}",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "linkUrlTemplate": "{{ @ }}",
+                                    "linkTextTemplate": "{{ @ }}",
+                                    "linkTitleTemplate": "{{ @ }}",
+                                    "linkOpenInNewTab": true,
+                                    "name": "latitude",
+                                    "type": "float",
+                                    "displayAs": "number",
+                                    "order": 3,
+                                    "title": "latitude",
+                                    "allowSearch": false,
+                                    "alignContent": "right",
+                                    "allowHTML": false,
+                                    "highlightLinks": false,
+                                    "useMonospaceFont": false,
+                                    "preserveWhitespace": false
+                                },
+                                {
+                                    "numberFormat": "0.00",
+                                    "booleanValues": [
+                                        "false",
+                                        "true"
+                                    ],
+                                    "imageUrlTemplate": "{{ @ }}",
+                                    "imageTitleTemplate": "{{ @ }}",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "linkUrlTemplate": "{{ @ }}",
+                                    "linkTextTemplate": "{{ @ }}",
+                                    "linkTitleTemplate": "{{ @ }}",
+                                    "linkOpenInNewTab": true,
+                                    "name": "mag",
+                                    "type": "float",
+                                    "displayAs": "number",
+                                    "order": 100002,
+                                    "title": "mag",
+                                    "allowSearch": false,
+                                    "alignContent": "right",
+                                    "allowHTML": false,
+                                    "highlightLinks": false,
+                                    "useMonospaceFont": false,
+                                    "preserveWhitespace": false
+                                }
+                            ],
+                            "allowHTMLByDefault": false,
+                            "itemsPerPage": 25,
+                            "paginationSize": "default",
+                            "condensed": true,
+                            "withRowNumber": false,
+                            "frame": {
+                                "showTitle": true,
+                                "title": "Earthquakes List"
+                            }
+                        }
+                    },
+                    "position": {
+                        "x": 3,
+                        "y": 2,
+                        "width": 3,
+                        "height": 8
+                    }
+                },
+                {
+                    "widget": {
+                        "name": "96cdc237",
+                        "queries": [
+                            {
+                                "name": "dashboards/01f00691c4c415368eb9837e35e94e4a/datasets/01f00795ed7a1343a80a58f7a7644882_tz",
+                                "query": {
+                                    "datasetName": "e3e404a3",
+                                    "fields": [
+                                        {
+                                            "name": "tz",
+                                            "expression": "`tz`"
+                                        },
+                                        {
+                                            "name": "tz_associativity",
+                                            "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                                        }
+                                    ],
+                                    "disaggregated": false
+                                }
+                            },
+                            {
+                                "name": "parameter_dashboards/01f00691c4c415368eb9837e35e94e4a/datasets/01f00691c4c41b4aad2188430cb48630_parameter",
+                                "query": {
+                                    "datasetName": "temp_dataset_name",
+                                    "parameters": [
+                                        {
+                                            "name": "parameter",
+                                            "keyword": "parameter"
+                                        }
+                                    ],
+                                    "disaggregated": false
+                                }
+                            }
+                        ],
+                        "spec": {
+                            "version": 2,
+                            "widgetType": "filter-single-select",
+                            "encodings": {
+                                "fields": [
+                                    {
+                                        "parameterName": "parameter",
+                                        "queryName": "parameter_dashboards/01f00691c4c415368eb9837e35e94e4a/datasets/01f00691c4c41b4aad2188430cb48630_parameter"
+                                    },
+                                    {
+                                        "fieldName": "tz",
+                                        "displayName": "tz",
+                                        "queryName": "dashboards/01f00691c4c415368eb9837e35e94e4a/datasets/01f00795ed7a1343a80a58f7a7644882_tz"
+                                    }
+                                ]
+                            },
+                            "frame": {
+                                "showTitle": true,
+                                "title": "Timezone"
+                            }
+                        }
+                    },
+                    "position": {
+                        "x": 0,
+                        "y": 0,
+                        "width": 1,
+                        "height": 2
+                    }
+                },
+                {
+                    "widget": {
+                        "name": "842f061d",
+                        "queries": [
+                            {
+                                "name": "main_query",
+                                "query": {
+                                    "datasetName": "temp_dataset_name",
+                                    "fields": [
+                                        {
+                                            "name": "count(*)",
+                                            "expression": "COUNT(`*`)"
+                                        }
+                                    ],
+                                    "disaggregated": false
+                                }
+                            }
+                        ],
+                        "spec": {
+                            "version": 2,
+                            "widgetType": "counter",
+                            "encodings": {
+                                "value": {
+                                    "fieldName": "count(*)",
+                                    "displayName": "Count of Records"
+                                }
+                            },
+                            "frame": {
+                                "showTitle": true,
+                                "title": "Count"
+                            }
+                        }
+                    },
+                    "position": {
+                        "x": 1,
+                        "y": 0,
+                        "width": 1,
+                        "height": 2
+                    }
+                },
+                {
+                    "widget": {
+                        "name": "8a402925",
+                        "queries": [
+                            {
+                                "name": "main_query",
+                                "query": {
+                                    "datasetName": "temp_dataset_name",
+                                    "fields": [
+                                        {
+                                            "name": "measure(mag_max)",
+                                            "expression": "MEASURE(`mag_max`)"
+                                        }
+                                    ],
+                                    "disaggregated": false
+                                }
+                            }
+                        ],
+                        "spec": {
+                            "version": 2,
+                            "widgetType": "counter",
+                            "encodings": {
+                                "value": {
+                                    "fieldName": "measure(mag_max)",
+                                    "displayName": "mag_max"
+                                }
+                            },
+                            "frame": {
+                                "showTitle": true,
+                                "title": "Magnitude Max"
+                            }
+                        }
+                    },
+                    "position": {
+                        "x": 2,
+                        "y": 0,
+                        "width": 1,
+                        "height": 2
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+# A job running SQL queries on a SQL warehouse
+resources:
+  jobs:
+    dbsql_earthquake_monitor:
+      name: dbsql_earthquake_monitor
+
+      schedule:
+        quartz_cron_expression: 0 0/5 * * * ?
+        timezone_id: UTC
+        pause_status: PAUSED
+      
+      max_concurrent_runs: 1
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+        - name: api_path
+          default: ${var.api_path}
+
+      tasks:
+        - task_key: load_data
+          notebook_task:
+            notebook_path: ../src/earthquake_monitor.sql
+            warehouse_id: ${var.warehouse_id}
+            base_parameters:
+              job_id: "{{workspace.id}}"
+              job_run_id: "{{job.run_id}}"
