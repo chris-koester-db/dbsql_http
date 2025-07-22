@@ -41,7 +41,7 @@ targets:
       root_path: /Workspace/${bundle.name}
     variables:
       warehouse_id: 4b9b953939869799
-      catalog: users
+      catalog: dbsql_ops
       schema: default
     permissions:
       - user_name: chris.koester@databricks.com

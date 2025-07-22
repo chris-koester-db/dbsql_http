@@ -4,6 +4,9 @@ resources:
     dbsql_ops_create_functions:
       name: dbsql_ops_create_functions
 
+      tags:
+        workload: ${bundle.name}
+
       parameters:
         - name: catalog
           default: ${var.catalog}
