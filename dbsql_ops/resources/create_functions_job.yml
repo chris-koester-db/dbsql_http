@@ -1,0 +1,17 @@
+# A job running SQL queries on a SQL warehouse
+resources:
+  jobs:
+    dbsql_ops_create_functions:
+      name: dbsql_ops_create_functions
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+
+      tasks:
+        - task_key: create_functions
+          notebook_task:
+            notebook_path: ../src/create_functions.ipynb
+            warehouse_id: ${var.warehouse_id}
