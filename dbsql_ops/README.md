@@ -4,7 +4,7 @@ Perform DBSQL management tasks with SQL. Features include:
 - Create, update, get, list, delete warehouses
 - List query history
 
-This project requires an [HTTP connection](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-connection) like the one shown below. OAuth is also available. See the documentation for [HTTP connection](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-connection) or [Connect to external HTTP services](https://docs.databricks.com/aws/en/query-federation/http) for more details.
+This project requires an [HTTP connection](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-connection) like the one shown below. OAuth is also available. See the documentation for [HTTP connection](https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-connection) or [Connect to external HTTP services](https://docs.databricks.com/aws/en/query-federation/http) for more details. The default connection name is `databricks_api`.
 
 ```sql
 create connection if not exists databricks_api
