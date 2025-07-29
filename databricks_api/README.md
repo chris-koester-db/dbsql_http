@@ -1,6 +1,6 @@
 # Databricks API
 
-Examples of how to work with the [Databricks API](https://docs.databricks.com/api/workspace/introduction) using SQL.
+Examples of how to work with the [Databricks API](https://docs.databricks.com/api/workspace/introduction) using SQL. The Databricks SQL functions and examples have been moved to the [dbsql_ops folder](../dbsql_ops).
 
 ## Getting Started
 
