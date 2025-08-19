@@ -14,7 +14,89 @@ resources:
           default: ${var.schema}
 
       tasks:
-        - task_key: create_functions
+        - task_key: fn_create_alert
+          sql_task:
+            file:
+              path: ../src/fn_create_alert.sql
+            warehouse_id: ${var.warehouse_id}
+        
+        - task_key: fn_create_warehouse
+          sql_task:
+            file:
+              path: ../src/fn_create_warehouse.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_delete_warehouse
+          sql_task:
+            file:
+              path: ../src/fn_delete_warehouse.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_get_table
+          sql_task:
+            file:
+              path: ../src/fn_get_table.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_get_warehouse_info
+          sql_task:
+            file:
+              path: ../src/fn_get_warehouse_info.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_get_warehouse_permission_levels
+          sql_task:
+            file:
+              path: ../src/fn_get_warehouse_permission_levels.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_get_warehouse_permissions
+          sql_task:
+            file:
+              path: ../src/fn_get_warehouse_permissions.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_list_warehouses
+          sql_task:
+            file:
+              path: ../src/fn_list_warehouses.sql
+            warehouse_id: ${var.warehouse_id}
+        
+        - task_key: fn_set_warehouse_permissions
+          sql_task:
+            file:
+              path: ../src/fn_set_warehouse_permissions.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_unix_timestamp_ms
+          sql_task:
+            file:
+              path: ../src/fn_unix_timestamp_ms.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_list_queries
+          depends_on:
+            - task_key: fn_unix_timestamp_ms
+          sql_task:
+            file:
+              path: ../src/fn_list_queries.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_update_warehouse_permissions
+          sql_task:
+            file:
+              path: ../src/fn_update_warehouse_permissions.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: fn_update_warehouse
+          sql_task:
+            file:
+              path: ../src/fn_update_warehouse.sql
+            warehouse_id: ${var.warehouse_id}
+
+        - task_key: sp_get_clustering_metadata
+          depends_on:
+            - task_key: fn_get_table
           notebook_task:
-            notebook_path: ../src/create_functions.ipynb
+            notebook_path: ../src/sp_get_clustering_metadata.ipynb
             warehouse_id: ${var.warehouse_id}
