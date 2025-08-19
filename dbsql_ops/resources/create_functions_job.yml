@@ -56,6 +56,12 @@ resources:
               path: ../src/fn_get_warehouse_permissions.sql
             warehouse_id: ${var.warehouse_id}
 
+        - task_key: fn_list_directory_contents
+          sql_task:
+            file:
+              path: ../src/fn_list_directory_contents.sql
+            warehouse_id: ${var.warehouse_id}
+
         - task_key: fn_list_warehouses
           sql_task:
             file:
