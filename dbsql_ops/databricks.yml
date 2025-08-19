@@ -13,7 +13,7 @@ variables:
   warehouse_id:
     description: Lookup ID of an existing warehouse
     lookup:
-      warehouse: "Shared Serverless"
+      warehouse: "Shared Unity Catalog Serverless"
   catalog:
     description: The catalog to use
   schema:
