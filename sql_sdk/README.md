@@ -1,4 +1,4 @@
-# sql_sdk
+# Databricks SDK for SQL
 
 Perform DBSQL management tasks with SQL. Features include:
 - Create, update, get, list, delete warehouses
