@@ -1,8 +1,8 @@
 # A job running SQL queries on a SQL warehouse
 resources:
   jobs:
-    dbsql_ops_create_functions:
-      name: dbsql_ops_create_functions
+    sql_sdk_setup:
+      name: sql_sdk_setup
 
       tags:
         workload: ${bundle.name}

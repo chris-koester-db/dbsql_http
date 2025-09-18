@@ -1,4 +1,4 @@
-# dbsql_ops
+# sql_sdk
 
 Perform DBSQL management tasks with SQL. Features include:
 - Create, update, get, list, delete warehouses
@@ -35,7 +35,7 @@ options (
 
     This deploys everything that's defined for this project.
     For example, the default template would deploy a job called
-    `[dev yourname] dbsql_ops_job` to your workspace.
+    `[dev yourname] sql_sdk_job` to your workspace.
     You can find that job by opening your workpace and clicking on **Workflows**.
 
 4. Similarly, to deploy a production copy, type:
