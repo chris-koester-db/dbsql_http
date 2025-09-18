@@ -3,6 +3,7 @@ resources:
   jobs:
     sql_sdk_setup:
       name: sql_sdk_setup
+      description: "Configures Databricks SDK for SQL."
 
       tags:
         workload: ${bundle.name}
